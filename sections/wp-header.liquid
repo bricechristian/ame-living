@@ -1,0 +1,1550 @@
+<link rel="stylesheet" href="{{ 'component-list-menu.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ 'component-search.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ 'component-menu-drawer.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ 'component-cart-notification.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ 'component-cart-items.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+{%- if settings.predictive_search_enabled -%}
+  <link rel="stylesheet" href="{{ 'component-price.css' | asset_url }}" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="{{ 'component-loading-overlay.css' | asset_url }}" media="print" onload="this.media='all'">
+{%- endif -%}
+
+  <link rel="stylesheet" href="{{ 'component-mega-menu.css' | asset_url }}" media="print" onload="this.media='all'">
+  <noscript>{{ 'component-mega-menu.css' | asset_url | stylesheet_tag }}</noscript>
+
+{%- if settings.cart_type == "drawer" -%}
+  {{ 'component-cart-drawer.css' | asset_url | stylesheet_tag }}
+  {{ 'component-cart.css' | asset_url | stylesheet_tag }}
+  {{ 'component-totals.css' | asset_url | stylesheet_tag }}
+  {{ 'component-price.css' | asset_url | stylesheet_tag }}
+  {{ 'component-discounts.css' | asset_url | stylesheet_tag }}
+  {{ 'component-loading-overlay.css' | asset_url | stylesheet_tag }}
+{%- endif -%}
+
+<noscript>{{ 'component-list-menu.css' | asset_url | stylesheet_tag }}</noscript>
+<noscript>{{ 'component-search.css' | asset_url | stylesheet_tag }}</noscript>
+<noscript>{{ 'component-menu-drawer.css' | asset_url | stylesheet_tag }}</noscript>
+<noscript>{{ 'component-cart-notification.css' | asset_url | stylesheet_tag }}</noscript>
+<noscript>{{ 'component-cart-items.css' | asset_url | stylesheet_tag }}</noscript>
+
+
+<style>
+a:hover {
+	color: #323132 !important;
+	text-decoration: none !important;
+}
+.main-header {
+	background-color: #f8f4f1;
+	max-height: 80px;
+}
+.announcement-bar {
+	background: #e7d8ca;
+	z-index: 1000000;
+	text-align: center;
+	position: relative;
+	padding: 20px;
+	color: #323132;
+}
+.main-nav {
+	padding-left: 0;
+	margin-bottom: 0;
+}
+.primary-nav-wrapper {
+	z-index: 1000000;
+	position: relative;
+	background-color: #f8f4f1;
+	transition: background-color 0.3s ease;
+}
+@media (max-width: 1200px) {
+	.primary-nav-wrapper {
+		padding-top: 16px;
+		padding-bottom: 16px;
+		padding-left: 15px;
+		padding-right: 15px;
+	}
+}
+.main-nav li, .main-header li, .shop-nav li {
+	list-style: none;
+	margin-left: 18px;
+	margin-right: 18px;
+}
+@media (max-width: 1400px) {
+	.main-nav li, .main-header li, .shop-nav li {
+		margin-left: 12px;
+		margin-right: 12px;
+	}
+}
+.main-nav a, .shop-nav a {
+	padding-top: 35px;
+	padding-bottom: 35px;
+	color: #323132;
+	text-transform: uppercase;
+	display: inline-block;
+	position: relative;
+	white-space: nowrap;
+	font-family: AkkuratMono, sans-serif;
+	font-size: 9px;
+	letter-spacing: 1.8px;
+	line-height: 10px;
+}
+.main-nav a, .shop-nav a {
+	padding-top: 35px;
+	padding-bottom: 35px;
+	color: #323132;
+	text-transform: uppercase;
+	display: inline-block;
+	position: relative;
+	white-space: nowrap;
+	text-decoration: none !important;
+}
+.main-nav a:hover, .shop-nav a:hover {
+	text-decoration: none;
+}
+.main-nav a::before, .shop-nav a::before {
+	content: "";
+	position: absolute;
+	top: 3px;
+	left: 0;
+	right: 0;
+	height: 4px;
+	opacity: 0;
+	transition: all 0.4s ease;
+	background: #c8a895;
+}
+.main-nav a:hover::before, .shop-nav a:hover::before, .main-nav li.current-menu-item a::before, .shop-nav li a.active::before {
+	opacity: 1;
+	top: 0;
+}
+.menu-primary-navigation-container {
+	width: 100%;
+}
+.menu-secondary-navigation-container {
+	width: 90%;
+}
+.mega-sub-nav {
+	width: 30%;
+	min-width: 250px;
+}
+.search-nav-item, .account-nav-item {
+	min-width: 18px;
+	margin-left: 3vw !important;
+}
+header .nav--desktop {
+	display: flex !important;
+}
+@media (max-width: 1200px) {
+	header .nav--desktop {
+		display: none !important;
+	}
+}
+.font-cadiz-light {
+    font-family: Cadiz-Light,serif!important;
+}
+header .nav--mobile {
+	display: none !important;
+}
+@media (max-width: 1200px) {
+	header .nav--mobile {
+		display: flex !important;
+	}
+}
+header .header__icons {
+    position: relative;
+    top: 2px;
+}
+header .header__icon--cart {
+    left: 0;
+    margin: 0 18px;
+    width: 20px;
+    height: auto;
+}
+header .header__icon--search {
+  width: 18px;
+  margin: 0 18px 0 3vw;
+}
+header .header__icon .icon-search {
+  width: 20px;
+  height: 20px;
+}
+header .is-dropdown a {
+  color: #323132;
+}
+header .wps-items.wps-items-list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px 20px;
+    padding: 0px;
+    transition: opacity 0.3s ease 0s;
+    opacity: 1;
+}
+.mobile-nav-sec {
+	margin-top: 40px;
+	height: 47vh;
+	overflow-y: scroll;
+	padding-bottom: 50px;
+	padding-right: 10px;
+}
+.mobile-nav-sec .contact-wrap {
+	width: 100%;
+	text-align: center;
+}
+.mobile-nav-sec .open-close {
+	display: inline-block;
+	right: 0;
+	color: #323132;
+	border-radius: 3px;
+	position: absolute;
+	line-height: 0;
+	font-size: 13px;
+	vertical-align: middle;
+	padding: 0;
+	margin-top: 0;
+	transition: all 0.4s ease;
+	width: 28px;
+	text-align: center;
+}
+.mobile-nav-sec .open-close .icon::before {
+	transition: all 0.4s ease;
+}
+@media (max-width: 1200px){
+  .sticky-wrapper {
+      position: relative;
+      z-index: 999999;
+  }
+}
+.mobile-menu {
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 100000;
+	top: 0;
+	padding-top: 85px;
+	display: none;
+	transition: all 0.2s ease;
+	padding-left: 30px;
+	padding-right: 30px;
+	max-height: 100vh;
+}
+.mobile-menu.go {
+	display: block;
+}
+.mobile-menu ul li {
+	text-align: left;
+	margin-left: 0;
+	margin-right: 0;
+}
+.mobile-menu ul li a::after {
+	display: none;
+}
+.mobile-menu-links {
+	transform: translateY(-50px);
+	transition: all 0.3s ease;
+}
+.mobile-menu .footer-sm {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+.mobile-menu .footer {
+	padding-bottom: 20px;
+}
+.menu-mobile-navigation-container, .menu-mobile-navigation-container ul, .menu-mobile-navigation-container ul li {
+	width: 100%;
+}
+.menu-mobile-navigation-container ul.sub-menu {
+	border-top: 1px solid #303753;
+	border-bottom: 1px solid #303753;
+	margin-top: 17px;
+	padding-top: 17px;
+	padding-bottom: 17px;
+	margin-bottom: 17px;
+	display: none;
+	max-height: 0;
+	height: 0;
+	transition: max-height 0.3s ease;
+	overflow: hidden;
+}
+.nav--mobile .search--icon {
+    width: 22px;
+    height: 22px;
+    position: relative;
+    bottom: 1px;
+}
+.mobile-footer-nav {
+  padding: 13px 0;
+}
+@media (max-width: 992px){
+  .footer .social-icons {
+    padding-top: 21px !important;
+    padding-bottom: 21px !important;
+  }
+}
+/** hamburger */
+
+.hamburger-inner {
+	margin-top: 0;
+}
+.hamburger-inner, .hamburger-inner::after, .hamburger-inner::before {
+	width: 26px !important;
+	height: 1px !important;
+	background-color: #b3a091 !important;
+}
+.hamburger-inner::before {
+	top: -7px !important;
+}
+.hamburger-inner::after {
+	bottom: -7px !important;
+}
+.hamburger-box {
+	width: 25px !important;
+	height: 20px !important;
+}
+.hamburger--slider .hamburger-inner {
+	top: 10px !important;
+}
+.hamburger--slider .hamburger-inner::after {
+	top: 7px !important;
+}
+.hamburger {
+	padding: 0 0 0 !important;
+	height: 20px !important;
+	display: flex;
+}
+.hamburger--slider.is-active .hamburger-inner::after {
+	top: 20px !important;
+	background-color: #323132 !important;
+}
+.hamburger--slider.is-active .hamburger-inner {
+	top: 2px !important;
+	background-color: #323132 !important;
+}
+.stuck {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 100000;
+}
+a.brand img {
+	max-width: 110px;
+}
+@media (max-width: 768px) {
+	a.brand img {
+		max-width: 90px;
+	}
+}
+.person--icon {
+	color: #646970;
+}  
+</style>
+
+<script src="{{ 'details-disclosure.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'details-modal.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'cart-notification.js' | asset_url }}" defer="defer"></script>
+{%- if settings.cart_type == "drawer" -%}
+  <script src="{{ 'cart-drawer.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
+
+<svg xmlns="http://www.w3.org/2000/svg" class="hidden">
+  <symbol id="icon-search" viewbox="0 0 18 19" fill="none">
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M11.03 11.68A5.784 5.784 0 112.85 3.5a5.784 5.784 0 018.18 8.18zm.26 1.12a6.78 6.78 0 11.72-.7l5.4 5.4a.5.5 0 11-.71.7l-5.41-5.4z" fill="currentColor"/>
+  </symbol>
+
+  <symbol id="icon-close" class="icon icon-close" fill="none" viewBox="0 0 18 17">
+    <path d="M.865 15.978a.5.5 0 00.707.707l7.433-7.431 7.579 7.282a.501.501 0 00.846-.37.5.5 0 00-.153-.351L9.712 8.546l7.417-7.416a.5.5 0 10-.707-.708L8.991 7.853 1.413.573a.5.5 0 10-.693.72l7.563 7.268-7.418 7.417z" fill="currentColor">
+  </symbol>
+</svg>
+
+<header class="main-header relative" id="primary-nav">
+  <div class="d-flex align-items-center primary-nav-wrapper nav-border-btm">
+    <nav class="nav-primary col-md-3 col-lg-5 left-nav">
+      <div class="nav--desktop w-100">
+        <div class="menu-primary-navigation-container">
+          <ul id="menu-primary-navigation" class="main-nav w-100 d-flex cat-nav"><li id="menu-item-8" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-8"><a href="https://wordpress-761898-2579257.cloudwaysapps.com/category/find-beauty/" data-dropdown="dropdown-4">Find Beauty</a></li>
+            <li id="menu-item-10" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-10"><a href="https://wordpress-761898-2579257.cloudwaysapps.com/category/be-well/" data-dropdown="dropdown-5">Be Well</a></li>
+            <li id="menu-item-12" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-12"><a href="https://wordpress-761898-2579257.cloudwaysapps.com/category/get-mindful/" data-dropdown="dropdown-7">Get Mindful</a></li>
+            <li id="menu-item-1246" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1246"><a href="https://wordpress-761898-2579257.cloudwaysapps.com/category/jenj/" data-dropdown="dropdown-40">JEN J.</a></li>
+            <li id="menu-item-1867" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1867"><a href="https://wordpress-761898-2579257.cloudwaysapps.com/category/live-fully/" data-dropdown="dropdown-230">Live Fully</a></li>
+          </ul>
+        </div>        
+      </div>
+      <div class="nav--mobile d-flex align-items-center">
+        <button class="hamburger hamburger--slider js-hamburger" type="button">
+          <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+          </span>
+        </button>
+      </div>
+    </nav>
+    <div class="col-lg-2 col-6 d-flex justify-content-center">
+      <a class="brand" href="https://wordpress-761898-2579257.cloudwaysapps.com/">
+        <img 
+          alt="Joon" 
+          data-src="{{ 'logo.svg' | asset_url }}" 
+          class="lazyload" src="{{ 'logo.svg' | asset_url }}">
+        <noscript>&lt;img src="{{ 'logo.svg' | asset_url }}" alt="Joon" /&gt;</noscript>
+      </a>
+    </div>
+    <nav class="nav-primary col-md-3 col-lg-5">
+      <div class="nav--desktop d-flex justify-content-end right-nav align-items-center">
+        <div class="menu-secondary-navigation-container">
+          <ul id="menu-secondary-navigation" class="main-nav w-100 d-flex justify-content-end"><li id="menu-item-23" class="follow-parent menu-item menu-item-type-custom menu-item-object-custom menu-item-23"><a href="#" data-dropdown="dropdown-">Follow</a></li>
+            <li id="menu-item-22" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-22"><a href="https://wordpress-761898-2579257.cloudwaysapps.com/about/" data-dropdown="dropdown-">About</a></li>
+            <li id="menu-item-243" class="contact-parent menu-item menu-item-type-custom menu-item-object-custom menu-item-243"><a href="#" data-dropdown="dropdown-">Contact</a></li>
+            <li id="menu-item-172" class="shop-parent menu-item menu-item-type-post_type menu-item-object-page menu-item-172"><a href="https://wordpress-761898-2579257.cloudwaysapps.com/shop/" data-dropdown="dropdown-">Shop</a></li>
+          </ul>
+        </div>
+        {% comment %} HEADER ICONS {% endcomment %}
+        <div class="header__icons">
+          {% comment %}
+          <details-modal class="header__search">
+            <details>
+              <summary class="header__icon header__icon--search header__icon--summary link focus-inset modal__toggle" aria-haspopup="dialog" aria-label="{{ 'general.search.search' | t }}">
+                <span>
+                  <svg xmlns="http://www.w3.org/2000/svg" class="modal__toggle-open icon icon-search" width="19" height="20" viewBox="0 0 19 20" version="1.1"><g id="PHASE-1-FINAL" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g id="HOME—DESKTOP-Copy" transform="translate(-1390 -22)" stroke="#B3A091" stroke-width="1.213"><g id="Group" transform="translate(0 -2)"><g id="Group-4" transform="translate(31 21)"><g id="Group-2" transform="translate(0 2)"><g id="Group-16" transform="rotate(-9 701.206 -8629.22)"><circle id="Oval" cx="7.663" cy="7.324" r="7.277"/><path d="M11.192 13.216c.152.216 1.769 2.237 4.85 6.064" id="Path-2"/></g></g></g></g></g></g></svg>
+                  <svg class="modal__toggle-close icon icon-close" aria-hidden="true" focusable="false" role="presentation">
+                    <use href="#icon-close">
+                  </svg>
+                </span>
+              </summary>
+              <div class="search-modal modal__content gradient" role="dialog" aria-modal="true" aria-label="{{ 'general.search.search' | t }}">
+                <div class="modal-overlay"></div>
+                <div class="search-modal__content{% if settings.inputs_shadow_vertical_offset != 0 and settings.inputs_shadow_vertical_offset < 0 %} search-modal__content-top{% else %} search-modal__content-bottom{% endif %}" tabindex="-1">
+                  {%- if settings.predictive_search_enabled -%}
+                    <predictive-search class="search-modal__form" data-loading-text="{{ 'accessibility.loading' | t }}">
+                  {%- endif -%}
+                    <form action="{{ routes.search_url }}" method="get" role="search" class="search search-modal__form">
+                      <div class="field">
+                        <input class="search__input field__input"
+                          id="Search-In-Modal"
+                          type="search"
+                          name="q"
+                          value=""
+                          placeholder="{{ 'general.search.search' | t }}"
+                          {%- if settings.predictive_search_enabled -%}
+                            role="combobox"
+                            aria-expanded="false"
+                            aria-owns="predictive-search-results-list"
+                            aria-controls="predictive-search-results-list"
+                            aria-haspopup="listbox"
+                            aria-autocomplete="list"
+                            autocorrect="off"
+                            autocomplete="off"
+                            autocapitalize="off"
+                            spellcheck="false"
+                          {%- endif -%}
+                        >
+                        <label class="field__label" for="Search-In-Modal">{{ 'general.search.search' | t }}</label>
+                        <input type="hidden" name="options[prefix]" value="last">
+                        <button class="search__button field__button" aria-label="{{ 'general.search.search' | t }}">
+                          <svg class="icon icon-search" aria-hidden="true" focusable="false" role="presentation">
+                            <use href="#icon-search">
+                          </svg>
+                        </button>
+                      </div>
+    
+                      {%- if settings.predictive_search_enabled -%}
+                        <div class="predictive-search predictive-search--header" tabindex="-1" data-predictive-search>
+                          <div class="predictive-search__loading-state">
+                            <svg aria-hidden="true" focusable="false" role="presentation" class="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+                              <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
+                            </svg>
+                          </div>
+                        </div>
+    
+                        <span class="predictive-search-status visually-hidden" role="status" aria-hidden="true"></span>
+                      {%- endif -%}
+                    </form>
+                  {%- if settings.predictive_search_enabled -%}
+                    </predictive-search>
+                  {%- endif -%}
+                  <button type="button" class="search-modal__close-button modal__close-button link link--text focus-inset" aria-label="{{ 'accessibility.close' | t }}">
+                    <svg class="icon icon-close" aria-hidden="true" focusable="false" role="presentation">
+                      <use href="#icon-close">
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </details>
+          </details-modal>
+          {% endcomment %}
+          <a href="#" class="search-event header__icon header__icon--search">
+            <img 
+              src="{{ 'icon-search.svg' | asset_url }}"
+              width="19"
+              height="19"
+              loading="lazy"
+              alt="AME Search Icon" 
+            />                
+          </a>         
+          <a href="{{ routes.cart_url }}" class="header__icon header__icon--cart link focus-inset" id="cart-icon-bubble">
+            {%- liquid
+              if cart == empty
+                render 'icon-cart-empty'
+              else
+                render 'icon-cart'
+              endif
+            -%}
+            <span class="visually-hidden">{{ 'templates.cart.cart' | t }}</span>
+            {%- if cart != empty -%}
+              <div class="cart-count-bubble">
+                {%- if cart.item_count < 100 -%}
+                  <span aria-hidden="true">{{ cart.item_count }}</span>
+                {%- endif -%}
+                <span class="visually-hidden">{{ 'sections.header.cart_count' | t: count: cart.item_count }}</span>
+              </div>
+            {%- endif -%}
+          </a>
+        </div>
+        {% comment %} [END] HEADER ICONS {% endcomment %}
+        {%- if settings.cart_type == "notification" -%}
+          {%- render 'cart-notification', color_scheme: section.settings.color_scheme -%}
+        {%- endif -%}
+      </div>
+        <div class="d-flex justify-content-end nav--mobile">
+          <li class="search-nav-item"><a href="#" class="search-event">
+            <svg xmlns="http://www.w3.org/2000/svg" class="search--icon" width="19" height="20" viewBox="0 0 19 20" version="1.1"><g id="PHASE-1-FINAL" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g id="HOME—DESKTOP-Copy" transform="translate(-1390 -22)" stroke="#B3A091" stroke-width="1.213"><g id="Group" transform="translate(0 -2)"><g id="Group-4" transform="translate(31 21)"><g id="Group-2" transform="translate(0 2)"><g id="Group-16" transform="rotate(-9 701.206 -8629.22)"><circle id="Oval" cx="7.663" cy="7.324" r="7.277"/><path d="M11.192 13.216c.152.216 1.769 2.237 4.85 6.064" id="Path-2"/></g></g></g></g></g></g></svg>
+          </a></li>
+        </div>
+    </nav>
+  </div>
+
+    <section class="is-dropdown follow-menu bg-brown-alt align-center" style="transform: translateY(0%);">
+        <ul class="no-formate d-flex align-items-center justify-content-center social-icons" style="opacity: 0; transform: translateY(-10px);">
+            <li>
+                <a href="https://www.instagram.com/ameliving/" target="_blank"><img alt="" class=" lazyloaded" data-src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/themes/joon/dist/images/icons/instagram_b138c76a.svg" src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/themes/joon/dist/images/icons/instagram_b138c76a.svg"><noscript><img alt="" class="lazyload" data-src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/themes/joon/dist/images/icons/instagram_b138c76a.svg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="><noscript><img alt="" class="lazyload" data-src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/themes/joon/dist/images/icons/instagram_b138c76a.svg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="><noscript><img alt="" src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/themes/joon/dist/images/icons/instagram_b138c76a.svg"></noscript></noscript></noscript></a>
+            </li>
+            <li>
+                <a href="https://www.pinterest.com/ameliving/" target="_blank"><img alt="" class=" lazyloaded" data-src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/themes/joon/dist/images/icons/pinterest_ed640bfb.svg" src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/themes/joon/dist/images/icons/pinterest_ed640bfb.svg"><noscript><img alt="" class="lazyload" data-src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/themes/joon/dist/images/icons/pinterest_ed640bfb.svg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="><noscript><img alt="" class="lazyload" data-src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/themes/joon/dist/images/icons/pinterest_ed640bfb.svg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="><noscript><img alt="" src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/themes/joon/dist/images/icons/pinterest_ed640bfb.svg"></noscript></noscript></noscript></a>
+            </li>
+            <li>
+                <a href="https://www.facebook.com/amelivingco" target="_blank"><img alt="" class=" lazyloaded" data-src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/themes/joon/dist/images/icons/facebook_0fe316d8.svg" src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/themes/joon/dist/images/icons/facebook_0fe316d8.svg"><noscript><img alt="" class="lazyload" data-src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/themes/joon/dist/images/icons/facebook_0fe316d8.svg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="><noscript><img alt="" class="lazyload" data-src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/themes/joon/dist/images/icons/facebook_0fe316d8.svg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="><noscript><img alt="" src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/themes/joon/dist/images/icons/facebook_0fe316d8.svg"></noscript></noscript></noscript></a>
+            </li>
+            <li>
+                <a href="https://twitter.com/amelivingco" target="_blank"><img alt="" class=" lazyloaded" data-src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/themes/joon/dist/images/icons/twitter_f0345021.svg" src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/themes/joon/dist/images/icons/twitter_f0345021.svg"><noscript><img alt="" class="lazyload" data-src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/themes/joon/dist/images/icons/twitter_f0345021.svg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="><noscript><img alt="" class="lazyload" data-src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/themes/joon/dist/images/icons/twitter_f0345021.svg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="><noscript><img alt="" src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/themes/joon/dist/images/icons/twitter_f0345021.svg"></noscript></noscript></noscript></a>
+            </li>
+            <li>
+                <a href="https://www.youtube.com/channel/UC1W_-s386TJ3GP2l0nI3tdA/about?view_as=subscriber" target="_blank"><img alt="" class=" lazyloaded" data-src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/themes/joon/dist/images/icons/youtube_6f70673f.svg" src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/themes/joon/dist/images/icons/youtube_6f70673f.svg"><noscript><img alt="" class="lazyload" data-src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/themes/joon/dist/images/icons/youtube_6f70673f.svg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="><noscript><img alt="" class="lazyload" data-src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/themes/joon/dist/images/icons/youtube_6f70673f.svg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="><noscript><img alt="" src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/themes/joon/dist/images/icons/youtube_6f70673f.svg"></noscript></noscript></noscript></a>
+            </li>
+        </ul>
+    </section>
+    <section class="is-dropdown category-menu bg-tan" style="transform: translateY(0%);">
+        <div class="cat-wrapper" style="opacity: 0; transform: translateY(-10px);">
+            <div class="menu-primary-navigation-container">
+                <div class="sub-menu--drop dropdown-4">
+                    <div class="d-flex justify-content-between">
+                        <ul class="mega-sub-nav">
+                            <li>
+                                <a class="sm-headline" href="https://wordpress-877202-3039086.cloudwaysapps.com/category/find-beauty/body/">Body</a>
+                            </li>
+                            <li>
+                                <a class="sm-headline" href="https://wordpress-877202-3039086.cloudwaysapps.com/category/find-beauty/face/">Face</a>
+                            </li>
+                            <li>
+                                <a class="sm-headline" href="https://wordpress-877202-3039086.cloudwaysapps.com/category/find-beauty/hair/">Hair</a>
+                            </li>
+                            <li>
+                                <a class="sm-headline" href="https://wordpress-877202-3039086.cloudwaysapps.com/category/find-beauty/learn-skincare/">Learn Skincare</a>
+                            </li>
+                        </ul>
+                        <div class="d-flex w-100 justify-content-start">
+                            <div class="gap-25 align-center">
+                                <a href="https://wordpress-877202-3039086.cloudwaysapps.com/5-body-exfoliators-that-will-give-you-the-skin-of-a-goddess/">
+                                <div class="post--related-wrapper">
+                                    <img alt="" class=" lazyloaded" data-src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/uploads/2021/09/AME-Article-Photos-Correct-Size-756x936.png" src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/uploads/2021/09/AME-Article-Photos-Correct-Size-756x936.png"><noscript><img alt="" src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/uploads/2021/09/AME-Article-Photos-Correct-Size-756x936.png"></noscript>
+                                    <div class="sm-headline margin-top--20">
+                                        Find Beauty
+                                    </div>
+                                    <h2 class="headline-3 margin-top--10 font-cadiz-light">5 Body Exfoliators That Will Give You The Skin of a Goddess</h2>
+                                </div></a>
+                            </div>
+                            <div class="gap-25 align-center">
+                                <a href="https://wordpress-877202-3039086.cloudwaysapps.com/different-ways-to-view-your-skincare-routine/">
+                                <div class="post--related-wrapper">
+                                    <img alt="" class=" lazyloaded" data-src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/uploads/2021/09/AME-Article-Photos-Correct-Size-3-756x936.png" src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/uploads/2021/09/AME-Article-Photos-Correct-Size-3-756x936.png"><noscript><img alt="" src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/uploads/2021/09/AME-Article-Photos-Correct-Size-3-756x936.png"></noscript>
+                                    <div class="sm-headline margin-top--20">
+                                        Find Beauty
+                                    </div>
+                                    <h2 class="headline-3 margin-top--10 font-cadiz-light">Different Ways to View Your Skincare Routine</h2>
+                                </div></a>
+                            </div>
+                            <div class="gap-25 align-center">
+                                <a href="https://wordpress-877202-3039086.cloudwaysapps.com/save-your-skin-this-summer-with-these-products/">
+                                <div class="post--related-wrapper">
+                                    <img alt="" class=" lazyloaded" data-src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/uploads/2021/08/2-756x936.png" src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/uploads/2021/08/2-756x936.png"><noscript><img alt="" src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/uploads/2021/08/2-756x936.png"></noscript>
+                                    <div class="sm-headline margin-top--20">
+                                        Find Beauty
+                                    </div>
+                                    <h2 class="headline-3 margin-top--10 font-cadiz-light">Save Your Skin This Summer With These Products</h2>
+                                </div></a>
+                            </div>
+                            <div class="gap-25 align-center">
+                                <a href="https://wordpress-877202-3039086.cloudwaysapps.com/the-benefits-of-facial-acupuncture/">
+                                <div class="post--related-wrapper">
+                                    <img alt="" class=" lazyloaded" data-src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/uploads/2021/08/The-Benefits-of-Facial-Acupuncture-756x936.png" src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/uploads/2021/08/The-Benefits-of-Facial-Acupuncture-756x936.png"><noscript><img alt="" src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/uploads/2021/08/The-Benefits-of-Facial-Acupuncture-756x936.png"></noscript>
+                                    <div class="sm-headline margin-top--20">
+                                        Find Beauty
+                                    </div>
+                                    <h2 class="headline-3 margin-top--10 font-cadiz-light">The Benefits of Facial Acupuncture</h2>
+                                </div></a>
+                            </div>
+                            <div class="gap-25 align-center">
+                                <a href="https://wordpress-877202-3039086.cloudwaysapps.com/the-scientific-truth-about-boosting-collagen-production/">
+                                <div class="post--related-wrapper">
+                                    <img alt="" class=" lazyloaded" data-src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/uploads/2021/07/The-Scientific-Truth-About-Boosting-Collagen-Production-756x936.png" src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/uploads/2021/07/The-Scientific-Truth-About-Boosting-Collagen-Production-756x936.png"><noscript><img alt="" src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/uploads/2021/07/The-Scientific-Truth-About-Boosting-Collagen-Production-756x936.png"></noscript>
+                                    <div class="sm-headline margin-top--20">
+                                        Find Beauty
+                                    </div>
+                                    <h2 class="headline-3 margin-top--10 font-cadiz-light">The Scientific Truth About Boosting Collagen Production</h2>
+                                </div></a>
+                            </div>
+                            <div class="gap-25 align-center">
+                                <a href="https://wordpress-877202-3039086.cloudwaysapps.com/what-is-mewing-and-can-it-sculpt-your-jawline/">
+                                <div class="post--related-wrapper">
+                                    <img alt="" class=" lazyloaded" data-src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/uploads/2021/07/What-is-Mewing-and-Can-it-Sculpt-Your-Jawline-756x936.png" src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/uploads/2021/07/What-is-Mewing-and-Can-it-Sculpt-Your-Jawline-756x936.png"><noscript><img alt="" src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/uploads/2021/07/What-is-Mewing-and-Can-it-Sculpt-Your-Jawline-756x936.png"></noscript>
+                                    <div class="sm-headline margin-top--20">
+                                        Find Beauty
+                                    </div>
+                                    <h2 class="headline-3 margin-top--10 font-cadiz-light">What is Mewing and Can it Sculpt Your Jawline?</h2>
+                                </div></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="sub-menu--drop dropdown-5">
+                    <div class="d-flex justify-content-between">
+                        <ul class="mega-sub-nav">
+                            <li>
+                                <a class="sm-headline" href="https://wordpress-877202-3039086.cloudwaysapps.com/category/be-well/fitness/">fitness</a>
+                            </li>
+                            <li>
+                                <a class="sm-headline" href="https://wordpress-877202-3039086.cloudwaysapps.com/category/be-well/health/">Health</a>
+                            </li>
+                            <li>
+                                <a class="sm-headline" href="https://wordpress-877202-3039086.cloudwaysapps.com/category/be-well/recipes/">Recipes</a>
+                            </li>
+                            <li>
+                                <a class="sm-headline" href="https://wordpress-877202-3039086.cloudwaysapps.com/category/be-well/sexual-wellness/">Sexual wellness</a>
+                            </li>
+                        </ul>
+                        <div class="d-flex w-100 justify-content-start">
+                            <div class="gap-25 align-center">
+                                <a href="https://wordpress-877202-3039086.cloudwaysapps.com/healthy-persimmon-pudding-cake/">
+                                <div class="post--related-wrapper">
+                                    <img alt="" class=" lazyloaded" data-src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/uploads/2021/12/Screen-Shot-2021-12-17-at-6.56.23-AM-e1639753061932-756x936.png" src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/uploads/2021/12/Screen-Shot-2021-12-17-at-6.56.23-AM-e1639753061932-756x936.png"><noscript><img alt="" src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/uploads/2021/12/Screen-Shot-2021-12-17-at-6.56.23-AM-e1639753061932-756x936.png"></noscript>
+                                    <div class="sm-headline margin-top--20">
+                                        Be Well
+                                    </div>
+                                    <h2 class="headline-3 margin-top--10 font-cadiz-light">Healthy Persimmon Pudding Cake</h2>
+                                </div></a>
+                            </div>
+                            <div class="gap-25 align-center">
+                                <a href="https://wordpress-877202-3039086.cloudwaysapps.com/what-is-orgasmic-energy/">
+                                <div class="post--related-wrapper">
+                                    <img alt="" class=" ls-is-cached lazyloaded" data-src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/uploads/2021/12/WEB5473551-B5216CFD-5A31-24E3-73CC-124A34E8763F-756x936.jpg" src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/uploads/2021/12/WEB5473551-B5216CFD-5A31-24E3-73CC-124A34E8763F-756x936.jpg"><noscript><img alt="" src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/uploads/2021/12/WEB5473551-B5216CFD-5A31-24E3-73CC-124A34E8763F-756x936.jpg"></noscript>
+                                    <div class="sm-headline margin-top--20">
+                                        Sexual wellness
+                                    </div>
+                                    <h2 class="headline-3 margin-top--10 font-cadiz-light">What is Orgasmic Energy?</h2>
+                                </div></a>
+                            </div>
+                            <div class="gap-25 align-center">
+                                <a href="https://wordpress-877202-3039086.cloudwaysapps.com/the-fitness-lovers-gift-guide/">
+                                <div class="post--related-wrapper">
+                                    <img alt="" class=" lazyloaded" data-src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/uploads/2021/12/Screen-Shot-2021-12-17-at-6.44.07-AM-e1639753123321-756x936.png" src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/uploads/2021/12/Screen-Shot-2021-12-17-at-6.44.07-AM-e1639753123321-756x936.png"><noscript><img alt="" src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/uploads/2021/12/Screen-Shot-2021-12-17-at-6.44.07-AM-e1639753123321-756x936.png"></noscript>
+                                    <div class="sm-headline margin-top--20">
+                                        Be Well
+                                    </div>
+                                    <h2 class="headline-3 margin-top--10 font-cadiz-light">The Fitness Lover’s Gift Guide</h2>
+                                </div></a>
+                            </div>
+                            <div class="gap-25 align-center">
+                                <a href="https://wordpress-877202-3039086.cloudwaysapps.com/nighttime-snacks-that-you-can-enjoy-guilt-free/">
+                                <div class="post--related-wrapper">
+                                    <img alt="" class=" ls-is-cached lazyloaded" data-src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/uploads/2021/11/AME-Article-Photos-Correct-Size-2-756x936.jpg" src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/uploads/2021/11/AME-Article-Photos-Correct-Size-2-756x936.jpg"><noscript><img alt="" src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/uploads/2021/11/AME-Article-Photos-Correct-Size-2-756x936.jpg"></noscript>
+                                    <div class="sm-headline margin-top--20">
+                                        Be Well
+                                    </div>
+                                    <h2 class="headline-3 margin-top--10 font-cadiz-light">Nighttime Snacks That You Can Enjoy Guilt-Free</h2>
+                                </div></a>
+                            </div>
+                            <div class="gap-25 align-center">
+                                <a href="https://wordpress-877202-3039086.cloudwaysapps.com/what-exactly-is-autophagy/">
+                                <div class="post--related-wrapper">
+                                    <img alt="" class=" lazyloaded" data-src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/uploads/2021/11/AME-Article-Photos-Correct-Size-26-756x936.png" src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/uploads/2021/11/AME-Article-Photos-Correct-Size-26-756x936.png"><noscript><img alt="" src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/uploads/2021/11/AME-Article-Photos-Correct-Size-26-756x936.png"></noscript>
+                                    <div class="sm-headline margin-top--20">
+                                        Be Well
+                                    </div>
+                                    <h2 class="headline-3 margin-top--10 font-cadiz-light">What Exactly is Autophagy?</h2>
+                                </div></a>
+                            </div>
+                            <div class="gap-25 align-center">
+                                <a href="https://wordpress-877202-3039086.cloudwaysapps.com/the-incredible-benefits-of-dashi-broth-easy-recipe/">
+                                <div class="post--related-wrapper">
+                                    <img alt="" class=" lazyloaded" data-src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/uploads/2021/11/AME-Article-Photos-Correct-Size-756x936.png" src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/uploads/2021/11/AME-Article-Photos-Correct-Size-756x936.png"><noscript><img alt="" src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/uploads/2021/11/AME-Article-Photos-Correct-Size-756x936.png"></noscript>
+                                    <div class="sm-headline margin-top--20">
+                                        Be Well
+                                    </div>
+                                    <h2 class="headline-3 margin-top--10 font-cadiz-light">The Incredible Benefits of Dashi Broth (+ Easy Recipe!)</h2>
+                                </div></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="sub-menu--drop dropdown-7">
+                    <div class="d-flex justify-content-between">
+                        <ul class="mega-sub-nav">
+                            <li>
+                                <a class="sm-headline" href="https://wordpress-877202-3039086.cloudwaysapps.com/category/get-mindful/alignment/">alignment</a>
+                            </li>
+                            <li>
+                                <a class="sm-headline" href="https://wordpress-877202-3039086.cloudwaysapps.com/category/get-mindful/grow-spiritually/">Grow Spiritually</a>
+                            </li>
+                            <li>
+                                <a class="sm-headline" href="https://wordpress-877202-3039086.cloudwaysapps.com/category/get-mindful/relationships/">Relationships</a>
+                            </li>
+                        </ul>
+                        <div class="d-flex w-100 justify-content-start">
+                            <div class="gap-25 align-center">
+                                <a href="https://wordpress-877202-3039086.cloudwaysapps.com/the-best-crystals-for-the-fall-season/">
+                                <div class="post--related-wrapper">
+                                    <img alt="" class="lazyload" data-src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/uploads/2021/10/AME-Article-Photos-Correct-Size-19-756x936.png" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="><noscript><img alt="" src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/uploads/2021/10/AME-Article-Photos-Correct-Size-19-756x936.png"></noscript>
+                                    <div class="sm-headline margin-top--20">
+                                        Get Mindful
+                                    </div>
+                                    <h2 class="headline-3 margin-top--10 font-cadiz-light">The Best Crystals for The Fall Season</h2>
+                                </div></a>
+                            </div>
+                            <div class="gap-25 align-center">
+                                <a href="https://wordpress-877202-3039086.cloudwaysapps.com/microdosing-for-mental-health/">
+                                <div class="post--related-wrapper">
+                                    <img alt="" class="lazyload" data-src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/uploads/2021/08/Microdosing-For-Mental-Health-756x936.png" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="><noscript><img alt="" src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/uploads/2021/08/Microdosing-For-Mental-Health-756x936.png"></noscript>
+                                    <div class="sm-headline margin-top--20">
+                                        Get Mindful
+                                    </div>
+                                    <h2 class="headline-3 margin-top--10 font-cadiz-light">Microdosing For Mental Health</h2>
+                                </div></a>
+                            </div>
+                            <div class="gap-25 align-center">
+                                <a href="https://wordpress-877202-3039086.cloudwaysapps.com/a-routine-for-attracting-what-you-want/">
+                                <div class="post--related-wrapper">
+                                    <img alt="" class="lazyload" data-src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/uploads/2021/08/A-Routine-For-Attracting-What-You-Want-756x936.png" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="><noscript><img alt="" src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/uploads/2021/08/A-Routine-For-Attracting-What-You-Want-756x936.png"></noscript>
+                                    <div class="sm-headline margin-top--20">
+                                        Get Mindful
+                                    </div>
+                                    <h2 class="headline-3 margin-top--10 font-cadiz-light">A Routine For Attracting What You Want</h2>
+                                </div></a>
+                            </div>
+                            <div class="gap-25 align-center">
+                                <a href="https://wordpress-877202-3039086.cloudwaysapps.com/why-introvert-and-extrovert-are-outdated-terms/">
+                                <div class="post--related-wrapper">
+                                    <img alt="" class="lazyload" data-src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/uploads/2021/08/1-756x936.png" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="><noscript><img alt="" src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/uploads/2021/08/1-756x936.png"></noscript>
+                                    <div class="sm-headline margin-top--20">
+                                        Get Mindful
+                                    </div>
+                                    <h2 class="headline-3 margin-top--10 font-cadiz-light">Why “Introvert” and “Extrovert” Are Outdated Terms</h2>
+                                </div></a>
+                            </div>
+                            <div class="gap-25 align-center">
+                                <a href="https://wordpress-877202-3039086.cloudwaysapps.com/creating-an-altar-for-the-season-in-your-home/">
+                                <div class="post--related-wrapper">
+                                    <img alt="" class="lazyload" data-src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/uploads/2021/07/Creating-an-Altar-for-the-Season-in-Your-Home-756x936.png" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="><noscript><img alt="" src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/uploads/2021/07/Creating-an-Altar-for-the-Season-in-Your-Home-756x936.png"></noscript>
+                                    <div class="sm-headline margin-top--20">
+                                        Get Mindful
+                                    </div>
+                                    <h2 class="headline-3 margin-top--10 font-cadiz-light">Creating an Altar for the Season in Your Home</h2>
+                                </div></a>
+                            </div>
+                            <div class="gap-25 align-center">
+                                <a href="https://wordpress-877202-3039086.cloudwaysapps.com/what-is-emdr-therapy/">
+                                <div class="post--related-wrapper">
+                                    <img alt="" class="lazyload" data-src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/uploads/2021/07/EMDR-Therapy-756x936.png" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="><noscript><img alt="" src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/uploads/2021/07/EMDR-Therapy-756x936.png"></noscript>
+                                    <div class="sm-headline margin-top--20">
+                                        Get Mindful
+                                    </div>
+                                    <h2 class="headline-3 margin-top--10 font-cadiz-light">What Is EMDR Therapy?</h2>
+                                </div></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="sub-menu--drop dropdown-40">
+                    <div class="d-flex justify-content-between">
+                        <ul class="mega-sub-nav">
+                            <li>
+                                <a class="sm-headline" href="https://wordpress-877202-3039086.cloudwaysapps.com/category/jenj/through-the-lens/">Through the lens</a>
+                            </li>
+                        </ul>
+                        <div class="d-flex w-100 justify-content-start">
+                            <div class="gap-25 align-center">
+                                <a href="https://wordpress-877202-3039086.cloudwaysapps.com/jens-favorite-strength-training-moves-to-build-a-booty/">
+                                <div class="post--related-wrapper">
+                                    <img alt="" class=" lazyloaded" data-src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/uploads/2021/08/Build-A-Booty-756x936.png" src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/uploads/2021/08/Build-A-Booty-756x936.png"><noscript><img alt="" src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/uploads/2021/08/Build-A-Booty-756x936.png"></noscript>
+                                    <div class="sm-headline margin-top--20">
+                                        JEN J.
+                                    </div>
+                                    <h2 class="headline-3 margin-top--10 font-cadiz-light">Jen’s Favorite Strength Training Moves to Build a Booty</h2>
+                                </div></a>
+                            </div>
+                            <div class="gap-25 align-center">
+                                <a href="https://wordpress-877202-3039086.cloudwaysapps.com/conversations-with-jen-when-its-ok-to-be-selfish/">
+                                <div class="post--related-wrapper">
+                                    <img alt="" class=" ls-is-cached lazyloaded" data-src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/uploads/2020/03/IMG_3848-scaled-e1590144214456-756x936.jpg" src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/uploads/2020/03/IMG_3848-scaled-e1590144214456-756x936.jpg"><noscript><img alt="" src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/uploads/2020/03/IMG_3848-scaled-e1590144214456-756x936.jpg"></noscript>
+                                    <div class="sm-headline margin-top--20">
+                                        Through the lens
+                                    </div>
+                                    <h2 class="headline-3 margin-top--10 font-cadiz-light">Conversations with Jen: When It’s OK to be Selfish</h2>
+                                </div></a>
+                            </div>
+                            <div class="gap-25 align-center">
+                                <a href="https://wordpress-877202-3039086.cloudwaysapps.com/mindfulness-is-beauty/">
+                                <div class="post--related-wrapper">
+                                    <img alt="" class=" ls-is-cached lazyloaded" data-src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/uploads/2020/05/IMG_4561-756x936.jpg" src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/uploads/2020/05/IMG_4561-756x936.jpg"><noscript><img alt="" src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/uploads/2020/05/IMG_4561-756x936.jpg"></noscript>
+                                    <div class="sm-headline margin-top--20">
+                                        Through the lens
+                                    </div>
+                                    <h2 class="headline-3 margin-top--10 font-cadiz-light">Conversations with Jen: Mindfulness is Beauty</h2>
+                                </div></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="sub-menu--drop dropdown-230 active">
+                    <div class="d-flex justify-content-between">
+                        <ul class="mega-sub-nav">
+                            <li>
+                                <a class="sm-headline" href="https://wordpress-877202-3039086.cloudwaysapps.com/category/live-fully/interiors/">Interiors</a>
+                            </li>
+                            <li>
+                                <a class="sm-headline" href="https://wordpress-877202-3039086.cloudwaysapps.com/category/live-fully/parenthood/">Parenthood</a>
+                            </li>
+                            <li>
+                                <a class="sm-headline" href="https://wordpress-877202-3039086.cloudwaysapps.com/category/live-fully/style/">Style</a>
+                            </li>
+                        </ul>
+                        <div class="d-flex w-100 justify-content-start">
+                            <div class="gap-25 align-center">
+                                <a href="https://wordpress-877202-3039086.cloudwaysapps.com/gift-guide-superfood-pantry-staples-edition/">
+                                <div class="post--related-wrapper">
+                                    <img alt="" class=" lazyloaded" data-src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/uploads/2021/12/OiMenu-on-Pinterest-756x936.png" src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/uploads/2021/12/OiMenu-on-Pinterest-756x936.png"><noscript><img alt="" src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/uploads/2021/12/OiMenu-on-Pinterest-756x936.png"></noscript>
+                                    <div class="sm-headline margin-top--20">
+                                        Live Fully
+                                    </div>
+                                    <h2 class="headline-3 margin-top--10 font-cadiz-light">Gift Guide: Superfood Pantry Staples Edition</h2>
+                                </div></a>
+                            </div>
+                            <div class="gap-25 align-center">
+                                <a href="https://wordpress-877202-3039086.cloudwaysapps.com/the-activewear-brands-jen-trusts/">
+                                <div class="post--related-wrapper">
+                                    <img alt="" class=" lazyloaded" data-src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/uploads/2021/10/AME-Article-Photos-Correct-Size-17-756x936.png" src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/uploads/2021/10/AME-Article-Photos-Correct-Size-17-756x936.png"><noscript><img alt="" src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/uploads/2021/10/AME-Article-Photos-Correct-Size-17-756x936.png"></noscript>
+                                    <div class="sm-headline margin-top--20">
+                                        Live Fully
+                                    </div>
+                                    <h2 class="headline-3 margin-top--10 font-cadiz-light">The Activewear Brands Jen Trusts</h2>
+                                </div></a>
+                            </div>
+                            <div class="gap-25 align-center">
+                                <a href="https://wordpress-877202-3039086.cloudwaysapps.com/10-things-to-wear-every-week-under-100/">
+                                <div class="post--related-wrapper">
+                                    <img alt="" class=" lazyloaded" data-src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/uploads/2021/09/AME-Article-Photos-Correct-Size-11-756x936.png" src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/uploads/2021/09/AME-Article-Photos-Correct-Size-11-756x936.png"><noscript><img alt="" src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/uploads/2021/09/AME-Article-Photos-Correct-Size-11-756x936.png"></noscript>
+                                    <div class="sm-headline margin-top--20">
+                                        Live Fully
+                                    </div>
+                                    <h2 class="headline-3 margin-top--10 font-cadiz-light">10 Things to Wear Every Week Under $100</h2>
+                                </div></a>
+                            </div>
+                            <div class="gap-25 align-center">
+                                <a href="https://wordpress-877202-3039086.cloudwaysapps.com/why-and-how-you-should-heal-before-having-children/">
+                                <div class="post--related-wrapper">
+                                    <img alt="" class=" lazyloaded" data-src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/uploads/2021/09/AME-Article-Photos-Correct-Size-10-756x936.png" src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/uploads/2021/09/AME-Article-Photos-Correct-Size-10-756x936.png"><noscript><img alt="" src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/uploads/2021/09/AME-Article-Photos-Correct-Size-10-756x936.png"></noscript>
+                                    <div class="sm-headline margin-top--20">
+                                        Live Fully
+                                    </div>
+                                    <h2 class="headline-3 margin-top--10 font-cadiz-light">Why and How You Should Heal Before Having Children</h2>
+                                </div></a>
+                            </div>
+                            <div class="gap-25 align-center">
+                                <a href="https://wordpress-877202-3039086.cloudwaysapps.com/what-is-the-placenta-and-why-do-certain-cultures-honor-it/">
+                                <div class="post--related-wrapper">
+                                    <img alt="" class=" lazyloaded" data-src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/uploads/2021/09/AME-Article-Photos-Correct-Size-8-756x936.png" src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/uploads/2021/09/AME-Article-Photos-Correct-Size-8-756x936.png"><noscript><img alt="" src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/uploads/2021/09/AME-Article-Photos-Correct-Size-8-756x936.png"></noscript>
+                                    <div class="sm-headline margin-top--20">
+                                        Live Fully
+                                    </div>
+                                    <h2 class="headline-3 margin-top--10 font-cadiz-light">What Is the Placenta, and Why Do Certain Cultures Honor It?</h2>
+                                </div></a>
+                            </div>
+                            <div class="gap-25 align-center">
+                                <a href="https://wordpress-877202-3039086.cloudwaysapps.com/feng-shui-your-mirrors-at-home-for-ultimate-tranquility/">
+                                <div class="post--related-wrapper">
+                                    <img alt="" class=" lazyloaded" data-src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/uploads/2021/09/AME-Article-Photos-Correct-Size-6-756x936.png" src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/uploads/2021/09/AME-Article-Photos-Correct-Size-6-756x936.png"><noscript><img alt="" src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/uploads/2021/09/AME-Article-Photos-Correct-Size-6-756x936.png"></noscript>
+                                    <div class="sm-headline margin-top--20">
+                                        Live Fully
+                                    </div>
+                                    <h2 class="headline-3 margin-top--10 font-cadiz-light">Feng Shui Your Mirrors at Home for Ultimate Tranquility</h2>
+                                </div></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="is-dropdown contact-menu bg-tan align-center" style="transform: translateY(0%);">
+        <div class="container">
+            <div class="d-flex justify-content-between contact-details" style="opacity: 0; transform: translateY(-10px);">
+                <div class="contact-wrap align-center">
+                    <h3 class="headline-3 font-cadiz-light contact-desc">General questions, comments, and thoughtful ideas</h3>
+                    <div class="margin-top--20">
+                        <img alt="Contact" class=" lazyloaded" data-src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/themes/joon/dist/images/icons/contact-arrow_2de1a64a.svg" src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/themes/joon/dist/images/icons/contact-arrow_2de1a64a.svg"><noscript><img alt="Contact" class="lazyload" data-src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/themes/joon/dist/images/icons/contact-arrow_2de1a64a.svg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="><noscript><img alt="Contact" class="lazyload" data-src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/themes/joon/dist/images/icons/contact-arrow_2de1a64a.svg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="><noscript><img alt="Contact" class="lazyload" data-src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/themes/joon/dist/images/icons/contact-arrow_2de1a64a.svg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="><noscript><img alt="Contact" src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/themes/joon/dist/images/icons/contact-arrow_2de1a64a.svg"></noscript></noscript></noscript></noscript>
+                    </div>
+                    <div class="sm-headline margin-top--20">
+                        <a href="mailto:hello@ameliving.com">hello@ameliving.com</a>
+                    </div>
+                </div>
+                <div class="contact-wrap align-center">
+                    <h3 class="headline-3 font-cadiz-light contact-desc">Press inquiries, site info, sponsorships and sorts</h3>
+                    <div class="margin-top--20">
+                        <img alt="Contact" class=" lazyloaded" data-src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/themes/joon/dist/images/icons/contact-arrow_2de1a64a.svg" src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/themes/joon/dist/images/icons/contact-arrow_2de1a64a.svg"><noscript><img alt="Contact" class="lazyload" data-src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/themes/joon/dist/images/icons/contact-arrow_2de1a64a.svg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="><noscript><img alt="Contact" class="lazyload" data-src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/themes/joon/dist/images/icons/contact-arrow_2de1a64a.svg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="><noscript><img alt="Contact" class="lazyload" data-src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/themes/joon/dist/images/icons/contact-arrow_2de1a64a.svg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="><noscript><img alt="Contact" src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/themes/joon/dist/images/icons/contact-arrow_2de1a64a.svg"></noscript></noscript></noscript></noscript>
+                    </div>
+                    <div class="sm-headline margin-top--20">
+                        <a href="mailto:press@ameliving.com">press@ameliving.com</a>
+                    </div>
+                </div>
+                <div class="contact-wrap align-center">
+                    <h3 class="headline-3 font-cadiz-light contact-desc">To be featured on the site, or other editorial content ideas and suggestions:</h3>
+                    <div class="margin-top--20">
+                        <img alt="Contact" class=" ls-is-cached lazyloaded" data-src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/themes/joon/dist/images/icons/contact-arrow_2de1a64a.svg" src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/themes/joon/dist/images/icons/contact-arrow_2de1a64a.svg"><noscript><img alt="Contact" class="lazyload" data-src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/themes/joon/dist/images/icons/contact-arrow_2de1a64a.svg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="><noscript><img alt="Contact" class="lazyload" data-src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/themes/joon/dist/images/icons/contact-arrow_2de1a64a.svg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="><noscript><img alt="Contact" class="lazyload" data-src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/themes/joon/dist/images/icons/contact-arrow_2de1a64a.svg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="><noscript><img alt="Contact" src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/themes/joon/dist/images/icons/contact-arrow_2de1a64a.svg"></noscript></noscript></noscript></noscript>
+                    </div>
+                    <div class="sm-headline margin-top--20">
+                        <a href="mailto:editorial@ameliving.com">editorial@ameliving.com</a>
+                    </div>
+                </div>
+                <div class="contact-wrap align-center">
+                    <h3 class="headline-3 font-cadiz-light contact-desc">For job inquiries, applications, internships, and more:</h3>
+                    <div class="margin-top--20">
+                        <img alt="Contact" class=" ls-is-cached lazyloaded" data-src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/themes/joon/dist/images/icons/contact-arrow_2de1a64a.svg" src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/themes/joon/dist/images/icons/contact-arrow_2de1a64a.svg"><noscript><img alt="Contact" class="lazyload" data-src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/themes/joon/dist/images/icons/contact-arrow_2de1a64a.svg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="><noscript><img alt="Contact" class="lazyload" data-src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/themes/joon/dist/images/icons/contact-arrow_2de1a64a.svg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="><noscript><img alt="Contact" class="lazyload" data-src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/themes/joon/dist/images/icons/contact-arrow_2de1a64a.svg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="><noscript><img alt="Contact" src="https://wordpress-877202-3039086.cloudwaysapps.com/wp-content/themes/joon/dist/images/icons/contact-arrow_2de1a64a.svg"></noscript></noscript></noscript></noscript>
+                    </div>
+                    <div class="sm-headline margin-top--20">
+                        <a href="mailto:careers@ameliving.com">careers@ameliving.com</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="is-dropdown shop-menu bg-tan align-center" style="transform: translateY(0%);">
+        <div class="container-fluid">
+            <div class="d-flex justify-content-between shop-details" style="opacity: 0; transform: translateY(-10px);">
+                <!-- Menu -->
+                <ul class="shop-mega-menu mega-sub-nav">
+                    <li class="menu-item">
+                        <a href="https://ame-living-shop.myshopify.com/collections/all">SHOP AME</a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/shop">SHOP AME-APPROVED</a>
+                    </li>
+                </ul><!-- Shopify Products -->
+                <div class="d-flex w-100 justify-content-start">
+                    <div data-wpshopify-component="" data-wpshopify-component-id="e53447e93256fb659f9323fb077e6746788" data-wpshopify-component-type="products" data-wpshopify-payload-settings="eyJ0eXBlIjoicHJvZHVjdHMiLCJpc19zaW5nbGVfY29tcG9uZW50IjpmYWxzZSwiY29sbGVjdGlvbiI6IlNob3AgTWVnYSBNZW51IiwiaW1hZ2VzX3NpemluZ190b2dnbGUiOnRydWUsImltYWdlc19hbGlnbiI6ImNlbnRlciIsImltYWdlc19zaXppbmdfY3JvcCI6ImNlbnRlciIsImltYWdlc19zaXppbmdfaGVpZ2h0IjoyODAsInNob3dfaW1hZ2VzX2Nhcm91c2VsIjpmYWxzZSwiaXRlbXNfcGVyX3JvdyI6NCwibGltaXQiOjQsImxpbmtfdG8iOiJzaG9waWZ5IiwidGl0bGVfdHlwZV9mb250X2ZhbWlseSI6IkNhZGl6IExpZ2h0IiwicHJpY2luZ190eXBlX2ZvbnRfZmFtaWx5IjoiQWtrdXJhdC1Nb25vIiwidGl0bGVfdHlwZV9mb250X3NpemUiOiIyNy41cHgiLCJwcmljaW5nX3R5cGVfZm9udF9zaXplIjoiMTNweCIsIm1vYmlsZV9jb2x1bW5zIjoyLCJzaG93X2ZlYXR1cmVkX29ubHkiOnRydWUsInF1ZXJ5IjoiY29sbGVjdGlvbjpcInNob3AgbWVnYSBtZW51XCIifQ==">
+                        <style>
+
+                        .shopwp-skeleton-component {
+                         margin-bottom: 13px;
+                         border-radius: 15px;
+                         background: #eee;
+                        }
+
+                        .shopwp-skeleton-row {
+                         display: flex;
+                         justify-content: space-between;
+                        }
+
+                        .shopwp-skeleton-product-image {
+                         width: 300px;
+                         height: 150px;
+                        }
+
+                        .shopwp-skeleton-product-title {
+                         width: 200px;
+                         height: 20px;
+                        }
+
+                        .shopwp-skeleton-product-price {
+                         width: 160px;
+                         height: 20px;
+                        }      
+
+                        .shopwp-skeleton-product-buy-button {
+                         width: 300px;
+                        }
+
+                        .shopwp-skeleton-product-buy-button-value {
+                         width: 30%;
+                         max-width: 30%;
+                         flex: 0 0 30%;
+                         height: 20px;
+                        }
+
+                        .shopwp-skeleton-product-buy-button-cta {
+                         width: 300px;
+                         height: 40px;
+                        }
+
+                        </style>
+                        <section class="wps-items-wrapper css-5mdbmo-PaginationItemsContainerCSS">
+                            <section class="wps-items wps-items-list css-f3vyy7-PaginationItemsCSS">
+                                <div aria-label="Product" class="wps-item css-1qwxbkf-ProductWrapperCSS" data-wpshopify-is-available-for-sale="true" data-wpshopify-is-on-sale="false" itemscope itemtype="https://schema.org/Product">
+                                    <div aria-label="Product Images" class="wps-component wps-component-products-images css-17nb28u-ProductGalleryWrapperCSS" style="">
+                                        <div class="wps-gallery-featured-wrapper css-1w0isq8-paneElementCSS">
+                                            <div class="wps-product-image-wrapper css-tevyj4-ProductImageFeaturedWrapperCSS">
+                                                <a aria-label="Product Link" class="wps-products-link css-rj311j-linkCSS" href="https://ame-living-shop.myshopify.com/products/nike-toddler-roshe-one" target="_self"><img alt="Thumbnail for Beauty Bag" class="wps-product-image css-27mxcl-thumbnailStyles" data-zoom="https://cdn.shopify.com/s/files/1/0595/2451/3885/products/2524499.png?v=1665592662" itemprop="image" src="https://cdn.shopify.com/s/files/1/0595/2451/3885/products/2524499_x280.png?v=1665592662"></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div aria-label="Product Title" class="wps-component wps-component-products-title css-1xyy5k4-titleStylesWrapper" data-wps-component-order="0" style="">
+                                        <a aria-label="Product Link" class="wps-products-link css-rj311j-linkCSS" href="https://ame-living-shop.myshopify.com/products/nike-toddler-roshe-one" target="_self">
+                                        <div>
+                                            <p class="wps-product-type">SHOES</p>
+                                        </div>
+                                        <h2 class="wps-products-title css-1n8rzul-titleStyles" content="Beauty Bag" itemprop="name">Beauty Bag</h2>
+                                        <div>
+                                            <p class="wps-vendor-title">NIKE</p>
+                                        </div></a>
+                                    </div>
+                                    <div aria-label="Product Pricing" class="wps-component-products-pricing css-1ccapp0-ProductPricesCompareAtCSS">
+                                        <span class="wps-products-price wps-product-pricing wps-products-price-one css-ezj72y-priceWrapperCSS" data-show-price-range="true" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><span class="wps-pricing-range-wrapper css-15hxf5g-showPriceRangeStyles"><span class="wps-product-individual-price css-srcoh-priceCSS" content="70" data-price="70" itemprop="price">$70.00</span></span></span>
+                                    </div>
+                                    <div aria-label="Product Buy Button" class="wps-component-products-buy-button css-1xkdmuy-buyButtonWrapperCSS">
+                                        <div aria-label="Product Add Button" class="wps-component wps-component-products-add-button wps-btn-wrapper">
+                                            <div class="css-z74bxq-AddButtonWrapperCSS">
+                                                <a aria-label="Product Link" class="wps-products-link css-rj311j-linkCSS" href="https://ame-living-shop.myshopify.com/products/nike-toddler-roshe-one" target="_self"><button class="wps-btn wps-btn-secondary wps-add-to-cart css-1xj18r6-buttonCSS-addToCartCSS-AddButton" data-wps-is-direct-checkout="0" itemprop="potentialAction" itemscope itemtype="https://schema.org/BuyAction" role="button" type="button"><span aria-label="Product Add to Cart Text" class="css-uleb97-AddButtonTextCSS">View product</span></button></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div aria-label="Product" class="wps-item css-1qwxbkf-ProductWrapperCSS" data-wpshopify-is-available-for-sale="true" data-wpshopify-is-on-sale="false" itemscope itemtype="https://schema.org/Product">
+                                    <div aria-label="Product Images" class="wps-component wps-component-products-images css-17nb28u-ProductGalleryWrapperCSS" style="">
+                                        <div class="wps-gallery-featured-wrapper css-1w0isq8-paneElementCSS">
+                                            <div class="wps-product-image-wrapper css-tevyj4-ProductImageFeaturedWrapperCSS">
+                                                <a aria-label="Product Link" class="wps-products-link css-rj311j-linkCSS" href="https://ame-living-shop.myshopify.com/products/vans-era-59-desert-cowboy" target="_self"><img alt="Thumbnail for Body Oil" class="wps-product-image css-27mxcl-thumbnailStyles" data-zoom="https://cdn.shopify.com/s/files/1/0595/2451/3885/products/2679945.png?v=1665592747" itemprop="image" src="https://cdn.shopify.com/s/files/1/0595/2451/3885/products/2679945_x280.png?v=1665592747"></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div aria-label="Product Title" class="wps-component wps-component-products-title css-1xyy5k4-titleStylesWrapper" data-wps-component-order="0" style="">
+                                        <a aria-label="Product Link" class="wps-products-link css-rj311j-linkCSS" href="https://ame-living-shop.myshopify.com/products/vans-era-59-desert-cowboy" target="_self">
+                                        <div>
+                                            <p class="wps-product-type">SHOES</p>
+                                        </div>
+                                        <h2 class="wps-products-title css-1n8rzul-titleStyles" content="Body Oil" itemprop="name">Body Oil</h2>
+                                        <div>
+                                            <p class="wps-vendor-title">VANS</p>
+                                        </div></a>
+                                    </div>
+                                    <div aria-label="Product Pricing" class="wps-component-products-pricing css-1ccapp0-ProductPricesCompareAtCSS">
+                                        <span class="wps-products-price wps-product-pricing wps-products-price-one css-ezj72y-priceWrapperCSS" data-show-price-range="true" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><span class="wps-pricing-range-wrapper css-15hxf5g-showPriceRangeStyles"><span class="wps-product-individual-price css-srcoh-priceCSS" content="109.95" data-price="109.95" itemprop="price">$109.95</span></span></span>
+                                    </div>
+                                    <div aria-label="Product Buy Button" class="wps-component-products-buy-button css-1xkdmuy-buyButtonWrapperCSS">
+                                        <div aria-label="Product Add Button" class="wps-component wps-component-products-add-button wps-btn-wrapper">
+                                            <div class="css-z74bxq-AddButtonWrapperCSS">
+                                                <a aria-label="Product Link" class="wps-products-link css-rj311j-linkCSS" href="https://ame-living-shop.myshopify.com/products/vans-era-59-desert-cowboy" target="_self"><button class="wps-btn wps-btn-secondary wps-add-to-cart css-1xj18r6-buttonCSS-addToCartCSS-AddButton" data-wps-is-direct-checkout="0" itemprop="potentialAction" itemscope itemtype="https://schema.org/BuyAction" role="button" type="button"><span aria-label="Product Add to Cart Text" class="css-uleb97-AddButtonTextCSS">View product</span></button></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div aria-label="Product" class="wps-item css-1qwxbkf-ProductWrapperCSS" data-wpshopify-is-available-for-sale="true" data-wpshopify-is-on-sale="false" itemscope itemtype="https://schema.org/Product">
+                                    <div aria-label="Product Images" class="wps-component wps-component-products-images css-17nb28u-ProductGalleryWrapperCSS" style="">
+                                        <div class="wps-gallery-featured-wrapper css-1w0isq8-paneElementCSS">
+                                            <div class="wps-product-image-wrapper css-tevyj4-ProductImageFeaturedWrapperCSS">
+                                                <a aria-label="Product Link" class="wps-products-link css-rj311j-linkCSS" href="https://ame-living-shop.myshopify.com/products/dr-martens-1460z-dmc-8-eye-boot-cherry-smooth" target="_self"><img alt="Thumbnail for Glam Eye" class="wps-product-image css-27mxcl-thumbnailStyles" data-zoom="https://cdn.shopify.com/s/files/1/0595/2451/3885/products/2017333copy.png?v=1665353156" itemprop="image" src="https://cdn.shopify.com/s/files/1/0595/2451/3885/products/2017333copy_x280.png?v=1665353156"></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div aria-label="Product Title" class="wps-component wps-component-products-title css-1xyy5k4-titleStylesWrapper" data-wps-component-order="0" style="">
+                                        <a aria-label="Product Link" class="wps-products-link css-rj311j-linkCSS" href="https://ame-living-shop.myshopify.com/products/dr-martens-1460z-dmc-8-eye-boot-cherry-smooth" target="_self">
+                                        <div>
+                                            <p class="wps-product-type">FITNESS</p>
+                                        </div>
+                                        <h2 class="wps-products-title css-1n8rzul-titleStyles" content="Glam Eye" itemprop="name">Glam Eye</h2>
+                                        <div>
+                                            <p class="wps-vendor-title">MARTINNS</p>
+                                        </div></a>
+                                    </div>
+                                    <div aria-label="Product Pricing" class="wps-component-products-pricing css-1ccapp0-ProductPricesCompareAtCSS">
+                                        <span class="wps-products-price wps-product-pricing wps-products-price-one css-ezj72y-priceWrapperCSS" data-show-price-range="true" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><span class="wps-pricing-range-wrapper css-15hxf5g-showPriceRangeStyles"><span class="wps-product-individual-price css-srcoh-priceCSS" content="249" data-price="249" itemprop="price">$249.00</span></span></span>
+                                    </div>
+                                    <div aria-label="Product Buy Button" class="wps-component-products-buy-button css-1xkdmuy-buyButtonWrapperCSS">
+                                        <div aria-label="Product Add Button" class="wps-component wps-component-products-add-button wps-btn-wrapper">
+                                            <div class="css-z74bxq-AddButtonWrapperCSS">
+                                                <a aria-label="Product Link" class="wps-products-link css-rj311j-linkCSS" href="https://ame-living-shop.myshopify.com/products/dr-martens-1460z-dmc-8-eye-boot-cherry-smooth" target="_self"><button class="wps-btn wps-btn-secondary wps-add-to-cart css-1xj18r6-buttonCSS-addToCartCSS-AddButton" data-wps-is-direct-checkout="0" itemprop="potentialAction" itemscope itemtype="https://schema.org/BuyAction" role="button" type="button"><span aria-label="Product Add to Cart Text" class="css-uleb97-AddButtonTextCSS">View product</span></button></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div aria-label="Product" class="wps-item css-1qwxbkf-ProductWrapperCSS" data-wpshopify-is-available-for-sale="true" data-wpshopify-is-on-sale="false" itemscope itemtype="https://schema.org/Product">
+                                    <div aria-label="Product Images" class="wps-component wps-component-products-images css-17nb28u-ProductGalleryWrapperCSS" style="">
+                                        <div class="wps-gallery-featured-wrapper css-1w0isq8-paneElementCSS">
+                                            <div class="wps-product-image-wrapper css-tevyj4-ProductImageFeaturedWrapperCSS">
+                                                <a aria-label="Product Link" class="wps-products-link css-rj311j-linkCSS" href="https://ame-living-shop.myshopify.com/products/timberland-mens-6-inch-premium-boot" target="_self"><img alt="Thumbnail for Glam Time" class="wps-product-image css-27mxcl-thumbnailStyles" data-zoom="https://cdn.shopify.com/s/files/1/0595/2451/3885/products/31923copy.png?v=1665353387" itemprop="image" src="https://cdn.shopify.com/s/files/1/0595/2451/3885/products/31923copy_x280.png?v=1665353387"></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div aria-label="Product Title" class="wps-component wps-component-products-title css-1xyy5k4-titleStylesWrapper" data-wps-component-order="0" style="">
+                                        <a aria-label="Product Link" class="wps-products-link css-rj311j-linkCSS" href="https://ame-living-shop.myshopify.com/products/timberland-mens-6-inch-premium-boot" target="_self">
+                                        <div>
+                                            <p class="wps-product-type">SKINCARE</p>
+                                        </div>
+                                        <h2 class="wps-products-title css-1n8rzul-titleStyles" content="Glam Time" itemprop="name">Glam Time</h2>
+                                        <div>
+                                            <p class="wps-vendor-title">LORIZELLE</p>
+                                        </div></a>
+                                    </div>
+                                    <div aria-label="Product Pricing" class="wps-component-products-pricing css-1ccapp0-ProductPricesCompareAtCSS">
+                                        <span class="wps-products-price wps-product-pricing wps-products-price-one css-ezj72y-priceWrapperCSS" data-show-price-range="true" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><span class="wps-pricing-range-wrapper css-15hxf5g-showPriceRangeStyles"><span class="wps-product-individual-price css-srcoh-priceCSS" content="299.95" data-price="299.95" itemprop="price">$299.95</span></span></span>
+                                    </div>
+                                    <div aria-label="Product Buy Button" class="wps-component-products-buy-button css-1xkdmuy-buyButtonWrapperCSS">
+                                        <div aria-label="Product Add Button" class="wps-component wps-component-products-add-button wps-btn-wrapper">
+                                            <div class="css-z74bxq-AddButtonWrapperCSS">
+                                                <a aria-label="Product Link" class="wps-products-link css-rj311j-linkCSS" href="https://ame-living-shop.myshopify.com/products/timberland-mens-6-inch-premium-boot" target="_self"><button class="wps-btn wps-btn-secondary wps-add-to-cart css-1xj18r6-buttonCSS-addToCartCSS-AddButton" data-wps-is-direct-checkout="0" itemprop="potentialAction" itemscope itemtype="https://schema.org/BuyAction" role="button" type="button"><span aria-label="Product Add to Cart Text" class="css-uleb97-AddButtonTextCSS">View product</span></button></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <style>
+    .shop-mega-menu {
+      padding-left: 0;
+      padding-top:  0;
+    }
+
+    .shop-mega-menu .menu-item {
+      text-align: left;
+      font-family: 'Akkurat-Mono', sans-serif;
+      font-size: 10px;
+      letter-spacing: 2px;
+      }
+
+    </style>
+    <section class="is-dropdown search-menu bg-brown-alt align-center" style="transform: translateY(0%);">
+        <div class="container-lrg">
+            <form action="{{ routes.search_url }}" method="get" role="search" class="search-form relative">
+                <input 
+                  class="search-field"
+                  type="search"
+                  name="q"
+                  value=""
+                >
+                <button class="submit-btn" aria-label="{{ 'general.search.search' | t }}">
+                  <img 
+                    src="{{ 'submit.svg' | asset_url }}"
+                    width="16"
+                    height="13"
+                    loading="lazy"
+                    alt="AME Submit Icon" 
+                  />  
+                </button>
+            </form>          
+        </div>
+    </section>
+                        
+</header>
+
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": {{ shop.name | json }},
+  {% if section.settings.logo %}
+    "logo": {{ section.settings.logo | image_url: width: section.settings.logo.width | prepend: "https:" | json }},
+  {% endif %}
+  "sameAs": [
+    {{ settings.social_twitter_link | json }},
+    {{ settings.social_facebook_link | json }},
+    {{ settings.social_pinterest_link | json }},
+    {{ settings.social_instagram_link | json }},
+    {{ settings.social_tiktok_link | json }},
+    {{ settings.social_tumblr_link | json }},
+    {{ settings.social_snapchat_link | json }},
+    {{ settings.social_youtube_link | json }},
+    {{ settings.social_vimeo_link | json }}
+  ],
+  "url": {{ request.origin | append: page.url | json }}
+}
+</script>
+
+{%- if request.page_type == 'index' -%}
+  {% assign potential_action_target = request.origin | append: routes.search_url | append: "?q={search_term_string}" %}
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "WebSite",
+      "name": {{ shop.name | json }},
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {{ potential_action_target | json }},
+        "query-input": "required name=search_term_string"
+      },
+      "url": {{ request.origin | append: page.url | json }}
+    }
+  </script>
+{%- endif -%}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/shortcuts/sticky.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>                        
+<script>
+
+  let timer;
+  let isDropdownActive = false;
+  let animationReverse = false;
+  
+  new Waypoint.Sticky({
+    element: $('#primary-nav')[0],
+  });
+  function shareHover() {
+    $('.share-post').mouseenter(function(){
+      $(this).find('.share-text').addClass('fade-out');
+      $(this).find('.social-icons-share').addClass('fade-in');
+    });
+  
+    $('.share-post').mouseleave(function(){
+      $(this).find('.share-text').removeClass('fade-out');
+      $(this).find('.social-icons-share').removeClass('fade-in');
+    });
+  
+    $('.share-post').click(function(){
+      $(this).find('.share-text').addClass('fade-out');
+      $(this).find('.social-icons-share').addClass('fade-in');
+    });
+  }
+  
+  function contactDropdown() {
+    //let isFollowWorking = false;
+  
+    var contactMenu = anime.timeline({
+      easing: 'linear',
+      autoplay: false,
+      begin: function() {
+        //isFollowWorking = true;
+      },
+      complete: function() {
+        setTimeout(function(){
+          //isFollowWorking = false;
+        }, 1000);
+      },
+    });
+  
+    contactMenu.add({
+      targets: '.contact-menu',
+      translateY: [0, '100%'],
+      duration: 200,
+    })
+    .add({
+      targets: '.contact-menu .contact-details',
+      opacity: [0, 1],
+      translateY: [-10, 0],
+      duration: 200,
+    }, 400);
+  
+  
+    $('.contact-parent').on('mouseenter', function(e){
+      e.preventDefault();
+  
+      if(isDropdownActive){
+        return;
+      }
+  
+      isDropdownActive = true;
+      clearTimeout(timer);
+  
+      if (contactMenu.reversed) {
+        contactMenu.reverse();
+      }
+  
+      contactMenu.play();
+    });
+  
+    $('.contact-parent, .contact-menu').on('mouseleave', function(){
+  
+        timer = setTimeout(function(){
+          //if(!isFollowWorking) {
+            if( !isHovered('.contact-menu') && !isHovered('.contact-parent') ) {
+              if (!contactMenu.reversed) {
+                contactMenu.reverse();
+              }
+              contactMenu.play();
+              isDropdownActive = false;
+            }
+          //}
+        }, 400);
+  
+    });
+  }
+  
+  function shopDropdown() {
+    //let isFollowWorking = false;
+  
+    var shopMenu = anime.timeline({
+      easing: 'linear',
+      autoplay: false,
+      begin: function() {
+        //isFollowWorking = true;
+      },
+      complete: function() {
+        setTimeout(function(){
+          //isFollowWorking = false;
+        }, 1000);
+      },
+    });
+  
+    shopMenu.add({
+      targets: '.shop-menu',
+      translateY: [0, '100%'],
+      duration: 200,
+    })
+    .add({
+      targets: '.shop-menu .shop-details',
+      opacity: [0, 1],
+      translateY: [-10, 0],
+      duration: 200,
+    }, 400);
+  
+  
+    $('.shop-parent').on('mouseenter', function(e){
+      e.preventDefault();
+  
+      if(isDropdownActive){
+        return;
+      }
+  
+      isDropdownActive = true;
+      clearTimeout(timer);
+  
+      if (shopMenu.reversed) {
+        shopMenu.reverse();
+      }
+  
+      shopMenu.play();
+    });
+  
+    $('.shop-parent, .shop-menu').on('mouseleave', function(){
+  
+        timer = setTimeout(function(){
+          //if(!isFollowWorking) {
+            if( !isHovered('.shop-menu') && !isHovered('.shop-parent') ) {
+              if (!shopMenu.reversed) {
+                shopMenu.reverse();
+              }
+              shopMenu.play();
+              isDropdownActive = false;
+            }
+          //}
+        }, 400);
+  
+    });
+  }
+    
+  function searchBar() {
+    var searchMenu = anime.timeline({
+      easing: 'linear',
+      autoplay: false,
+    });
+  
+    searchMenu.add({
+      targets: '.search-menu',
+      translateY: [0, '100%'],
+      duration: 200,
+    })
+    .add({
+      targets: '.search-menu .search-form',
+      opacity: [0, 1],
+      translateY: [-10, 0],
+      duration: 200,
+      complete: function() {
+        $('.search-field').focus();
+      },
+    }, 400);
+  
+  
+    $('.search-event').on('click', function(e){
+      e.preventDefault();
+      $(this).toggleClass('is-active');
+  
+      if($(this).hasClass('is-active')) {
+        if (searchMenu.reversed) {
+          searchMenu.reverse();
+        }
+        searchMenu.play();
+      } else {
+        if (!searchMenu.reversed) {
+          searchMenu.reverse();
+        }
+        searchMenu.play();
+      }
+  
+    });
+  
+  
+  
+    // $('.search-event, .search-menu').on('mouseleave', function(){
+    //   timer = setTimeout(function(){
+    //     if( !isHovered('.search-menu') && !isHovered('.search-event') ) {
+    //       if (!searchMenu.reversed) {
+    //         searchMenu.reverse();
+    //       }
+    //       searchMenu.play();
+    //       isDropdownActive = false;
+    //     }
+    //   }, 600);
+    // });
+  }
+  
+  function categoryDropdown() {
+    var catMenu = anime.timeline({
+      easing: 'linear',
+      autoplay: false,
+    });
+  
+    catMenu.add({
+      targets: '.category-menu',
+      translateY: [0, '100%'],
+      duration: 200,
+    })
+    .add({
+      targets: '.cat-wrapper',
+      opacity: [0, 1],
+      translateY: [-10, 0],
+      duration: 200,
+    }, 400);
+  
+    $('.menu-item-object-category').on('mouseenter', function(e){
+      e.preventDefault();
+      $('.sub-menu--drop').removeClass('active');
+      let activeDropdown = $(this).find('a').data('dropdown');
+      $('.' + activeDropdown).addClass('active');
+  
+      if(isDropdownActive){
+        return;
+      }
+  
+      isDropdownActive = true;
+      clearTimeout(timer);
+  
+      if (catMenu.reversed) {
+        catMenu.reverse();
+      }
+      catMenu.play();
+    });
+  
+    $('.cat-nav li, .category-menu').on('mouseleave', function(){
+      timer = setTimeout(function(){
+        if (!isHovered('.cat-nav li') && !isHovered('.category-menu')) {
+  
+          if (!catMenu.reversed) {
+            catMenu.reverse();
+          }
+          catMenu.play();
+  
+          isDropdownActive = false;
+        }
+      }, 200);
+    });
+  }
+  
+  function followDropdown() {
+    //let isFollowWorking = false;
+  
+    var followMenu = anime.timeline({
+      easing: 'linear',
+      autoplay: false,
+      begin: function() {
+        //isFollowWorking = true;
+      },
+      complete: function() {
+        setTimeout(function(){
+          //isFollowWorking = false;
+        }, 1000);
+      },
+    });
+  
+    followMenu.add({
+      targets: '.follow-menu',
+      translateY: [0, '100%'],
+      duration: 200,
+    })
+    .add({
+      targets: '.follow-menu .social-icons',
+      opacity: [0, 1],
+      translateY: [-10, 0],
+      duration: 200,
+    }, 400);
+  
+  
+    $('.follow-parent').on('mouseenter', function(e){
+      e.preventDefault();
+  
+      if(isDropdownActive){
+        return;
+      }
+  
+      isDropdownActive = true;
+      clearTimeout(timer);
+  
+      if (followMenu.reversed) {
+        followMenu.reverse();
+      }
+  
+      followMenu.play();
+    });
+  
+    $('.follow-parent, .follow-menu').on('mouseleave', function(){
+  
+          timer = setTimeout(function(){
+            //if(!isFollowWorking) {
+              if( !isHovered('.follow-menu') && !isHovered('.follow-parent') ) {
+                if (!followMenu.reversed) {
+                  followMenu.reverse();
+                }
+                followMenu.play();
+                isDropdownActive = false;
+              }
+            //}
+          }, 400);
+  
+    });
+  }
+  
+  function isHovered(selector) {
+    return $(selector+':hover').length;
+  }  
+
+  searchBar();
+
+  categoryDropdown();
+
+  shopDropdown();
+
+  followDropdown();
+
+  contactDropdown();
+
+  shareHover();
+  
+</script>
+
+{% render 'mobile-menu' %}
+
+{% schema %}
+  {
+    "name": "Header",
+    "settings": []
+  }
+{% endschema %}

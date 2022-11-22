@@ -1,0 +1,473 @@
+{% comment %}theme-check-disable UndefinedObject{% endcomment %}
+<link rel="stylesheet" href="{{ 'component-newsletter.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ 'component-list-menu.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ 'component-list-payment.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ 'component-list-social.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ 'component-rte.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ 'disclosure.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<noscript>{{ 'component-newsletter.css' | asset_url | stylesheet_tag }}</noscript>
+<noscript>{{ 'component-list-menu.css' | asset_url | stylesheet_tag }}</noscript>
+<noscript>{{ 'component-list-payment.css' | asset_url | stylesheet_tag }}</noscript>
+<noscript>{{ 'component-list-social.css' | asset_url | stylesheet_tag }}</noscript>
+<noscript>{{ 'component-rte.css' | asset_url | stylesheet_tag }}</noscript>
+<noscript>{{ 'disclosure.css' | asset_url | stylesheet_tag }}</noscript>
+
+
+
+
+
+
+<style>
+  .container-lrg {
+    width: 1280px;
+}
+.container-lrg, .container-sm {
+    margin: auto;
+    padding-left: 30px;
+    padding-right: 30px;
+    max-width: 100%;
+    padding-top: 6px;
+    padding-bottom: 6px;
+}
+  .bo-info, .bo-info h4, .md-headline, .sm-headline, .stp-info {
+    font-family: AkkuratMono, sans-serif;
+    font-size: 9px;
+    letter-spacing: 1.8px;
+    line-height: 10px;
+}
+
+  .bo-info, .bo-info h4, .sm-headline, .stp-info {
+    text-transform: uppercase;
+}
+.cat-wrapper, .contact-details, .social-icons {
+    -webkit-transition: all .3s ease;
+    -o-transition: all .3s ease;
+    transition: all .3s ease;
+}
+  ul.no-formate li {
+    list-style: none;
+}
+
+  
+.border-top--brown {
+    border-top: 1px solid #c8a895 !important;
+}
+
+  .bg-tan, .primary-nav-wrapper.bg-tan {
+    background-color: #e7d8ca;
+}
+
+
+ul.no-formate {
+    padding-left: 0;
+    margin-bottom: 0;
+}
+  
+  
+.footer {
+  padding-top: 69.1px;
+  padding-bottom: 40px;
+}
+
+.tmpl-about .footer,
+.tmpl-press .footer {
+  padding-top: 20px;
+  padding-bottom: 70px;
+}
+
+.footer .social-icons li {
+  padding: 0 20px;
+}
+
+@media (max-width: 768px){
+  .footer .social-icons {
+    border-top: 1px solid #5b574e;
+    border-bottom: 1px solid #5b574e;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+  }
+}
+
+  @media (max-width: 768px){
+    .footer.border-top--brown {
+      border-top: 0;
+      padding-top: 0;
+    }
+  }
+
+
+.footer-terms {
+  padding: 0 20px;
+  line-height: 10px;
+  display: block;
+  color: #323132;
+}
+
+  @media (max-width: 1200px) {
+    .footer-terms { padding: 0 10px; }
+  }
+
+  @media screen and (max-width: 992px) {
+    .footer .container-lrg {
+      padding-left: 0;
+      padding-right: 0;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+    .footer .container-lrg .row{
+      margin-right: 0;
+      margin-left: 0;
+    }
+    .footer .social-icons {
+      border-top: 1px solid #5b574e;
+      border-bottom: 1px solid #5b574e;
+      padding-top: 25.5px;
+      padding-bottom: 25.5px;
+      margin-bottom: 20px;
+    }
+    .footer-terms { padding: 10px 20px; }
+    .footer{ padding-top: 0; border-top: 0 !important; }
+    .ghg { padding-left: 0; padding-right: 0; }
+    .ghg2 { padding-left: 0; }  
+    .ghg3 { padding-right: 0; }
+  }
+
+
+  @media screen and (max-width: 768px) {
+    .footer .container-lrg {
+       padding-left: 0 !important;
+       padding-right: 0 !important;
+    }    
+  }
+
+  @media screen and (max-width: 760px){
+    .ghg2 { text-align: center; padding-right: 0; }
+    .ghg3 { text-align: center; padding-left: 0; }
+  }
+
+
+</style>
+
+
+
+
+<div class="footer border-top--brown bg-tan">
+  <div class="container-lrg">
+    <div class="d-lg-flex align-items-center justify-content-lg-between row">
+      <div class="col-12 col-lg-4 order-lg-1 ghg">
+        <ul class="no-formate d-flex align-items-center justify-content-center social-icons">
+          <li> <a href="https://www.instagram.com/ameliving/" target="_blank"> <img alt="" data-src="https://wordpress-761898-2579257.cloudwaysapps.com//wp-content/themes/joon/dist/images/icons/instagram_b138c76a.svg" class=" ls-is-cached lazyloaded" src="https://wordpress-761898-2579257.cloudwaysapps.com//wp-content/themes/joon/dist/images/icons/instagram_b138c76a.svg"><noscript>&lt;img  alt="" data-src="https://wordpress-761898-2579257.cloudwaysapps.com//wp-content/themes/joon/dist/images/icons/instagram_b138c76a.svg" class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="&gt;&lt;noscript&gt;&lt;img  alt="" data-src="https://wordpress-761898-2579257.cloudwaysapps.com//wp-content/themes/joon/dist/images/icons/instagram_b138c76a.svg" class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="&gt;&lt;noscript&gt;&lt;img src="https://wordpress-761898-2579257.cloudwaysapps.com//wp-content/themes/joon/dist/images/icons/instagram_b138c76a.svg" alt=""&gt;</noscript> </a> </li>
+          <li> <a href="https://www.pinterest.com/ameliving/" target="_blank"> <img alt="" data-src="https://wordpress-761898-2579257.cloudwaysapps.com//wp-content/themes/joon/dist/images/icons/pinterest_ed640bfb.svg" class=" ls-is-cached lazyloaded" src="https://wordpress-761898-2579257.cloudwaysapps.com//wp-content/themes/joon/dist/images/icons/pinterest_ed640bfb.svg"><noscript>&lt;img  alt="" data-src="https://wordpress-761898-2579257.cloudwaysapps.com//wp-content/themes/joon/dist/images/icons/pinterest_ed640bfb.svg" class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="&gt;&lt;noscript&gt;&lt;img  alt="" data-src="https://wordpress-761898-2579257.cloudwaysapps.com//wp-content/themes/joon/dist/images/icons/pinterest_ed640bfb.svg" class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="&gt;&lt;noscript&gt;&lt;img src="https://wordpress-761898-2579257.cloudwaysapps.com//wp-content/themes/joon/dist/images/icons/pinterest_ed640bfb.svg" alt=""&gt;</noscript> </a> </li>
+          <li> <a href="https://www.facebook.com/amelivingco" target="_blank"> <img alt="" data-src="https://wordpress-761898-2579257.cloudwaysapps.com//wp-content/themes/joon/dist/images/icons/facebook_0fe316d8.svg" class=" ls-is-cached lazyloaded" src="https://wordpress-761898-2579257.cloudwaysapps.com//wp-content/themes/joon/dist/images/icons/facebook_0fe316d8.svg"><noscript>&lt;img  alt="" data-src="https://wordpress-761898-2579257.cloudwaysapps.com//wp-content/themes/joon/dist/images/icons/facebook_0fe316d8.svg" class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="&gt;&lt;noscript&gt;&lt;img  alt="" data-src="https://wordpress-761898-2579257.cloudwaysapps.com//wp-content/themes/joon/dist/images/icons/facebook_0fe316d8.svg" class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="&gt;&lt;noscript&gt;&lt;img src="https://wordpress-761898-2579257.cloudwaysapps.com//wp-content/themes/joon/dist/images/icons/facebook_0fe316d8.svg" alt=""&gt;</noscript> </a> </li>
+          <li> <a href="https://twitter.com/amelivingco" target="_blank"> <img alt="" data-src="https://wordpress-761898-2579257.cloudwaysapps.com//wp-content/themes/joon/dist/images/icons/twitter_f0345021.svg" class=" ls-is-cached lazyloaded" src="https://wordpress-761898-2579257.cloudwaysapps.com//wp-content/themes/joon/dist/images/icons/twitter_f0345021.svg"><noscript>&lt;img  alt="" data-src="https://wordpress-761898-2579257.cloudwaysapps.com//wp-content/themes/joon/dist/images/icons/twitter_f0345021.svg" class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="&gt;&lt;noscript&gt;&lt;img  alt="" data-src="https://wordpress-761898-2579257.cloudwaysapps.com//wp-content/themes/joon/dist/images/icons/twitter_f0345021.svg" class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="&gt;&lt;noscript&gt;&lt;img src="https://wordpress-761898-2579257.cloudwaysapps.com//wp-content/themes/joon/dist/images/icons/twitter_f0345021.svg" alt=""&gt;</noscript> </a> </li>
+          <li> <a href="https://www.youtube.com/channel/UC1W_-s386TJ3GP2l0nI3tdA/about?view_as=subscriber" target="_blank"> <img alt="" data-src="https://wordpress-761898-2579257.cloudwaysapps.com//wp-content/themes/joon/dist/images/icons/youtube_6f70673f.svg" class=" ls-is-cached lazyloaded" src="https://wordpress-761898-2579257.cloudwaysapps.com//wp-content/themes/joon/dist/images/icons/youtube_6f70673f.svg"><noscript>&lt;img  alt="" data-src="https://wordpress-761898-2579257.cloudwaysapps.com//wp-content/themes/joon/dist/images/icons/youtube_6f70673f.svg" class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="&gt;&lt;noscript&gt;&lt;img  alt="" data-src="https://wordpress-761898-2579257.cloudwaysapps.com//wp-content/themes/joon/dist/images/icons/youtube_6f70673f.svg" class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="&gt;&lt;noscript&gt;&lt;img src="https://wordpress-761898-2579257.cloudwaysapps.com//wp-content/themes/joon/dist/images/icons/youtube_6f70673f.svg" alt=""&gt;</noscript> </a> </li>
+        </ul>
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-4 order-lg-0 d-md-flex justify-content-md-center justify-content-lg-start align-center-lg align-items-center ghg2">
+        <div class="">
+          <div class="sm-headline caps footer-terms">
+            ©copyright Âmé
+          </div>
+        </div>
+        <div class="">
+          <a href="http://nicepeople.com" target="_blank" class="sm-headline caps footer-terms">Made By Nice People</a>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 col-lg-4 d-md-flex justify-content-md-center justify-content-lg-end align-items-center order-3 align-center-lg ghg3">
+        <div class="">
+          <a href="https://wordpress-761898-2579257.cloudwaysapps.com//privacy-policy" target="_blank" class="sm-headline caps footer-terms">Privacy Policy</a>
+        </div>
+        <div>
+        <a href="https://wordpress-761898-2579257.cloudwaysapps.com//terms-conditions" target="_blank" class="sm-headline caps footer-terms">Terms &amp; Conditions</a>
+        </div>
+      </div>
+  </div>
+</div>
+</div>
+
+{% javascript %}
+  class LocalizationForm extends HTMLElement {
+    constructor() {
+      super();
+      this.elements = {
+        input: this.querySelector('input[name="locale_code"], input[name="country_code"]'),
+        button: this.querySelector('button'),
+        panel: this.querySelector('.disclosure__list-wrapper'),
+      };
+      this.elements.button.addEventListener('click', this.openSelector.bind(this));
+      this.elements.button.addEventListener('focusout', this.closeSelector.bind(this));
+      this.addEventListener('keyup', this.onContainerKeyUp.bind(this));
+
+      this.querySelectorAll('a').forEach(item => item.addEventListener('click', this.onItemClick.bind(this)));
+    }
+
+    hidePanel() {
+      this.elements.button.setAttribute('aria-expanded', 'false');
+      this.elements.panel.setAttribute('hidden', true);
+    }
+
+    onContainerKeyUp(event) {
+      if (event.code.toUpperCase() !== 'ESCAPE') return;
+
+      this.hidePanel();
+      this.elements.button.focus();
+    }
+
+    onItemClick(event) {
+      event.preventDefault();
+      const form = this.querySelector('form');
+      this.elements.input.value = event.currentTarget.dataset.value;
+      if (form) form.submit();
+    }
+
+    openSelector() {
+      this.elements.button.focus();
+      this.elements.panel.toggleAttribute('hidden');
+      this.elements.button.setAttribute('aria-expanded', (this.elements.button.getAttribute('aria-expanded') === 'false').toString());
+    }
+
+    closeSelector(event) {
+      const shouldClose = event.relatedTarget && event.relatedTarget.nodeName === 'BUTTON';
+      if (event.relatedTarget === null || shouldClose) {
+        this.hidePanel();
+      }
+    }
+  }
+
+  customElements.define('localization-form', LocalizationForm);
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "t:sections.footer.name",
+  "blocks": [
+    {
+      "type": "link_list",
+      "name": "t:sections.footer.blocks.link_list.name",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "default": "Quick links",
+          "label": "t:sections.footer.blocks.link_list.settings.heading.label"
+        },
+        {
+          "type": "link_list",
+          "id": "menu",
+          "default": "footer",
+          "label": "t:sections.footer.blocks.link_list.settings.menu.label",
+          "info": "t:sections.footer.blocks.link_list.settings.menu.info"
+        }
+      ]
+    },
+    {
+      "type": "socialMedia",
+      "name": "Social-media",
+      "settings": [
+       
+      ]
+    },
+    {
+      "type": "text",
+      "name": "t:sections.footer.blocks.text.name",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "default": "Heading",
+          "label": "t:sections.footer.blocks.text.settings.heading.label"
+        },
+        {
+          "type": "richtext",
+          "id": "subtext",
+          "default": "<p>Share contact information, store details, and brand content with your customers.</p>",
+          "label": "t:sections.footer.blocks.text.settings.subtext.label"
+        }
+      ]
+    },
+    {
+      "type": "image",
+      "name": "Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "range",
+          "id": "image_width",
+          "min": 50,
+          "max": 200,
+          "step": 5,
+          "unit": "px",
+          "label": "Image width",
+          "default": 100
+        },
+        {
+          "type": "select",
+          "id": "alignment",
+          "label": "Image alignment on large screen",
+          "options": [
+            {
+              "value": "",
+              "label": "Left"
+            },
+            {
+              "value": "center",
+              "label": "Center"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            }
+          ],
+          "default": "center"
+        }
+      ]
+    }
+  ],
+  "settings": [
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "t:sections.all.colors.accent_1.label"
+        },
+        {
+          "value": "accent-2",
+          "label": "t:sections.all.colors.accent_2.label"
+        },
+        {
+          "value": "background-1",
+          "label": "t:sections.all.colors.background_1.label"
+        },
+        {
+          "value": "background-2",
+          "label": "t:sections.all.colors.background_2.label"
+        },
+        {
+          "value": "inverse",
+          "label": "t:sections.all.colors.inverse.label"
+        }
+      ],
+      "default": "background-1",
+      "label": "t:sections.all.colors.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.footer.settings.header__1.content",
+      "info": "t:sections.footer.settings.header__1.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "newsletter_enable",
+      "default": true,
+      "label": "t:sections.footer.settings.newsletter_enable.label"
+    },
+    {
+      "type": "text",
+      "id": "newsletter_heading",
+      "default": "Subscribe to our emails",
+      "label": "t:sections.footer.settings.newsletter_heading.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.footer.settings.header__2.content",
+      "info": "t:sections.footer.settings.header__2.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_social",
+      "default": false,
+      "label": "t:sections.footer.settings.show_social.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.footer.settings.header__3.content",
+      "info": "t:sections.footer.settings.header__4.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_country_selector",
+      "default": true,
+      "label": "t:sections.footer.settings.enable_country_selector.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.footer.settings.header__5.content",
+      "info": "t:sections.footer.settings.header__6.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_language_selector",
+      "default": true,
+      "label": "t:sections.footer.settings.enable_language_selector.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.footer.settings.header__7.content"
+    },
+    {
+      "type": "checkbox",
+      "id": "payment_enable",
+      "default": true,
+      "label": "t:sections.footer.settings.payment_enable.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.spacing"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.footer.settings.margin_top.label",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 36
+    }
+  ],
+  "default": {
+    "blocks": [
+      {
+        "type": "link_list"
+      },
+      {
+        "type": "text"
+      }
+    ]
+  }
+}
+{% endschema %}
