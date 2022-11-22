@@ -1,2 +1,1 @@
-# ame-living
-AME Living Shopify Theme
+# AME Living Shopify Theme 
